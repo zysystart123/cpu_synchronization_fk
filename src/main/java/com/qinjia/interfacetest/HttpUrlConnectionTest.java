@@ -22,8 +22,6 @@ public class HttpUrlConnectionTest {
         // 因为读取的都是文本信息  所以使用BufferedReader
         BufferedReader bufferedReader = null;
 
-
-
         //StringBuilder来把接收到的数据拼接起来
         StringBuilder result = new StringBuilder();
         try {
@@ -43,7 +41,6 @@ public class HttpUrlConnectionTest {
 
             //设置请求参数  可以指定接收json参数  服务端的key为content-type
             conn.setRequestProperty("Accept", "application/json");
-
             //发送请求
 //            conn.connect();
 
@@ -52,7 +49,6 @@ public class HttpUrlConnectionTest {
                 //todo  此处应该增加异常处理手段
                 return "请求失败！！！";
             }
-
             //获取响应码 如果响应码为200 表示请求成功 然后可以读取数据
             //获取输入流  然后读取数据
             inputStream = conn.getInputStream();
