@@ -18,6 +18,9 @@ public class HttpUrlConnectionTest {
 
         //连接成功后我们是要读取数据的   所以要有一个输入流
         InputStream inputStream = null;
+        
+        
+        
 
         // 因为读取的都是文本信息  所以使用BufferedReader
         BufferedReader bufferedReader = null;
