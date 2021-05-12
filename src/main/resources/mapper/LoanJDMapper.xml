@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qinjia.mapper.LoanJDMapper">
+
+    <insert id="insertTCustUserS" parameterType="java.util.List">
+        insert into t_cust_user
+        (`id`,
+        `user_no`,
+        `user_name`,
+        `sex`,
+        `cert_type`,
+        `cert_no`,
+        `reg_prov`,
+        `is_valid`,
+        `version`,
+        `create_time`,
+        `update_time`,
+        `remark`) values
+
+        <foreach collection="list" item="item" index="index" open="" close="" separator=",">
+            (
+            #{item.id},
+            #{item.userNo},
+            #{item.userName},
+            #{item.sex},
+            #{item.certType},
+            #{item.certNo},
+            #{item.regProv},
+            #{item.isValid},
+            #{item.version},
+            #{item.createTime},
+            #{item.updateTime},
+            #{item.remark})
+        </foreach>
+    </insert>
+
+    <insert id="insertTCustBaseInfoS" parameterType="java.util.List">
+        insert into t_cust_base_info
+        (`id`,
+        `fund_no`,
+        `asset_no`,
+        `cust_no`,
+        `cust_name`,
+        `user_id`,
+        `cert_type`,
+        `cert_no`,
+        `phone`,
+        `sex`,
+        `country`,
+        `folk`,
+        `birthday`,
+        `qq`,
+        `email`,
+        `wechat`,
+        `is_valid`,
+        `version`,
+        `create_time`,
+        `update_time`,
+        `auth`,
+        `remark`,
+        `rownum`) values
+        <foreach collection="list" item="item" index="index" open="" close="" separator=",">
+            (#{item.id},
+            #{item.fundNo},
+            #{item.assetNo},
+            #{item.custNo},
+            #{item.custName},
+            #{item.userId},
+            #{item.certType},
+            #{item.certNo},
+            #{item.phone},
+            #{item.sex},
+            #{item.country},
+            #{item.folk},
+            #{item.birthday},
+            #{item.qq},
+            #{item.email},
+            #{item.wechat},
+            #{item.isValid},
+            #{item.version},
+            #{item.createTime},
+            #{item.updateTime},
+            #{item.auth},
+            #{item.remark},
+            #{item.rownum})
+        </foreach>
+    </insert>
+
+    <update id="updateTCustUserS" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update t_cust_user_real set
+            `remark` = #{item.remark}
+            where `id` =#{item.id}
+        </foreach>
+    </update>
+
+    <update id="updateTCustBaseInfoS" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update t_cust_base_info_real set
+            `remark` = #{item.remark}
+            where `id` =#{item.id}
+        </foreach>
+    </update>
+
+    <select id="selectTCustBaseInfo" parameterType="java.util.List" resultMap="TCustBaseInfo">
+        select * from t_cust_base_info_real where user_id in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+             #{item.id}
+        </foreach>
+    </select>
+    <resultMap id="TCustBaseInfo" type="com.qinjia.pojo.TCustBaseInfo">
+        <id property="id" column="id"/>
+        <result property="fundNo" column="fund_no"/>
+        <result property="assetNo" column="asset_no"/>
+        <result property="custNo" column="cust_no"/>
+        <result property="custName" column="cust_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="certType" column="cert_type"/>
+        <result property="certNo" column="cert_no"/>
+        <result property="phone" column="phone"/>
+        <result property="sex" column="sex"/>
+        <result property="country" column="country"/>
+        <result property="folk" column="folk"/>
+        <result property="birthday" column="birthday"/>
+        <result property="qq" column="qq"/>
+        <result property="email" column="email"/>
+        <result property="wechat" column="wechat"/>
+        <result property="edu" column="edu"/>
+        <result property="isValid" column="is_valid"/>
+        <result property="version" column="version"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="auth" column="auth"/>
+        <result property="remark" column="remark"/>
+        <result property="rownum" column="rownum"/>
+    </resultMap>
+
+    <update id="updateTCustUserSBAK" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update t_cust_user_real set
+            `user_no` = #{item.userNo},
+            `user_name` = #{item.userName},
+            `sex` = #{item.sex},
+            `cert_type` = #{item.certType},
+            `cert_no` = #{item.certNo},
+            `reg_prov` = #{item.regProv},
+            `is_valid` = #{item.isValid},
+            `version` = #{item.version},
+            `create_time` = #{item.createTime},
+            `update_time` = #{item.updateTime},
+            `remark` = #{item.remark}
+            where `id` =#{item.id}
+        </foreach>
+    </update>
+
+    <update id="updateTCustBaseInfoSBAK" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update t_cust_base_info_real set
+            `fund_no` = #{item.fundNo},
+            `asset_no` = #{item.assetNo},
+            `cust_no` = #{item.custNo},
+            `cust_name` = #{item.custName},
+            `user_id` = #{item.userId},
+            `cert_type` = #{item.certType},
+            `cert_no` = #{item.certNo},
+            `phone` = #{item.phone},
+            `sex` = #{item.sex},
+            `country` = #{item.country},
+            `folk` = #{item.folk},
+            `birthday` = #{item.birthday},
+            `qq` = #{item.qq},
+            `email` = #{item.email},
+            `wechat` = #{item.wechat},
+            `edu` = #{item.edu},
+            `is_valid` = #{item.isValid},
+            `version` = #{item.version},
+            `create_time` = #{item.createTime},
+            `update_time` = #{item.updateTime},
+            `auth` = #{item.auth},
+            `remark` = #{item.remark},
+            `rownum` = #{item.rownum}
+            where `id` =#{item.id}
+        </foreach>
+    </update>
+</mapper>

@@ -1,0 +1,61 @@
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8867
+  servlet:
+    context-path: /cpu_synchronization_fk
+
+#spring:
+# datasource:
+#   driver-class-name: com.mysql.cj.jdbc.Driver
+#   url: jdbc:mysql://192.168.3.171:3306/sinktest?useunicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+#   username: root
+#   password: root
+spring:
+  datasource:
+    dynamic:
+      primary: cpuPro #设置默认的数据源或者数据源组,默认值即为master
+      strict: false #设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候会抛出异常,不启动则使用默认数据源.
+      datasource:
+        cpuPro:
+          url: jdbc:mysql://rm-bp142moy5db999234hm.mysql.rds.aliyuncs.com:3306/cpu?useunicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+          username: reportuser
+          password: 86@cdTsjzk62#vY4
+          driver-class-name: com.mysql.cj.jdbc.Driver
+        appPro:
+          url: jdbc:mysql://rm-bp142moy5db999234hm.mysql.rds.aliyuncs.com:3306/app?useunicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+          username: reportuser
+          password: 86@cdTsjzk62#vY4
+          driver-class-name: com.mysql.cj.jdbc.Driver
+#        loanJD:
+#          url: jdbc:mysql://rm-2ze4g505tft2vp227am.mysql.rds.aliyuncs.com:3306/loan?useunicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+#          username: loan_uat_user
+#          password: Za@P@2522ZeE
+#        loanJD:
+#          #url: jdbc:mysql://rm-hp3qgn64g7i3s4yujco.mysql.huhehaote.rds.aliyuncs.com:3306/cpu_jd?useunicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+#          #username: cpu_jd_user
+#          #password: ClVqtGzutog6TkUF
+#          url: jdbc:mysql://192.168.3.171:3306/sinktest?useunicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+#          username: root
+#          password: root
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#        riskModel:
+#          url: jdbc:mysql://192.168.3.171:3306/sinktest?useunicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&allowMultiQueries=true
+#          username: root
+#          password: root
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+  fromMysql:
+    hostname: rm-bp142moy5db999234hm.mysql.rds.aliyuncs.com
+   #hostname: rr-2zedub9n0k3g0ct4yho.mysql.rds.aliyuncs.com
+    port: 3306
+    username: reportuser
+    password: 86@cdTsjzk62#vY4
+   #username: report_cpu_rd
+   #password: mZLuXSVd9j9kXcOe
+mybatis:
+    type-aliases-package: com.qinjia.pojo
+    mapper-locations: classpath:mapper/*Mapper.xml
+
+#该配置为删改表数据使用
+delete:
+  remark: 411381

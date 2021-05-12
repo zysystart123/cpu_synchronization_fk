@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qinjia.mapper.RiskModelMapper">
+
+    <insert id="insertTRiskCreditLevel1" parameterType="java.util.List">
+        insert into t_risk_credit_level
+        (`id`,
+        `user_id`,
+        `source_id`,
+        `product_code`,
+        `fund_code`,
+        `apply_date`,
+        `approved_amount`,
+        `state`,
+        `state_time`,
+        `channel_time`,
+        `reject_reason`,
+        `reject_reason_descr`,
+        `forbid_date`,
+        `device_fingerprint`,
+        `reject_source`,
+        `level`,
+        `simple_level`,
+        `is_frist_apply`) values
+        <foreach collection="list" item="item" index="index" open="" close="" separator=",">
+            (
+            #{item.id},
+            #{item.userId},
+            #{item.sourceId},
+            #{item.productCode},
+            #{item.fundCode},
+            #{item.applyDate},
+            #{item.approvedAmount},
+            #{item.state},
+            #{item.stateTime},
+            #{item.channelTime},
+            #{item.rejectReason},
+            #{item.rejectReasonDescr},
+            #{item.forbidDate},
+            #{item.deviceFingerprint},
+            #{item.rejectSource},
+            #{item.level},
+            #{item.simpleLevel},
+            #{item.isFristApply}
+            )
+        </foreach>
+    </insert>
+
+
+    <update id="updateTRiskCreditLevel1" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update t_risk_credit_level set
+            `approved_amount` = #{item.approvedAmount}
+            where `id` =#{item.id}
+        </foreach>
+    </update>
+
+    <update id="updateTRiskCreditLevel1One" parameterType="com.qinjia.pojo.TRiskCreditLevel1">
+            update  t_risk_credit_level set
+            `approved_amount` = #{approvedAmount},
+            `level` = #{level},
+            `simple_level` = #{simpleLevel}
+            where `id` =#{id}
+    </update>
+
+    <update id="updateTRiskCreditLevel1Entity" parameterType="com.qinjia.pojo.TRiskCreditLevel1">
+            update  t_risk_credit_level set
+            `source_id` = #{sourceId}
+            where `id` =#{id}
+    </update>
+
+    <insert id="insertTRiskCashRes1" parameterType="java.util.List">
+        insert into t_risk_cash_res
+        (`loan_no`, `apply_time`, `apply_amt`, `user_id`, `reject_reason`, `remark`, `create_time`) values
+        <foreach collection="list" item="item" index="index" open="" close="" separator=",">
+            (
+            #{item.loanNo},
+            #{item.applyTime},
+            #{item.applyAmt},
+            #{item.userId},
+            #{item.rejectReason},
+            #{item.remark},
+            #{item.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertZW" parameterType="java.util.List">
+        insert into zw_resultset
+        (`batch_no`, `input`, `engine_id`, `engine_ver`, `sub_ver`, `engine_name`, `engine_code`, `type`,
+        `audit_result`, `credit_score`, `credit_limit`, `status`, `datilResult`, `asset_no`, `asset_code`, `channel`,
+        `id_number`, `customer_name`, `phone_number`, `create_time`, `resultset_id`, `user_id`, `importtype`)
+        values
+        <foreach collection="list" item="item" index="index" open="" close="" separator=",">
+            (
+            #{item.batchNo},
+            #{item.input},
+            #{item.engineId},
+            #{item.engineVer},
+            #{item.subVer},
+            #{item.engineName},
+            #{item.engineCode},
+            #{item.type},
+            #{item.auditResult},
+            #{item.creditScore},
+            #{item.creditLimit},
+            #{item.status},
+            #{item.datilResult},
+            #{item.assetNo},
+            #{item.assetCode},
+            #{item.channel},
+            #{item.idNumber},
+            #{item.customerName},
+            #{item.phoneNumber},
+            #{item.createTime},
+            #{item.resultsetId},
+            #{item.userId},
+            #{item.importtype}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateZwResultestByBatchNo" parameterType="com.qinjia.pojo.ZwResultset">
+            update  zw_resultset set
+            `credit_limit` = #{creditLimit},
+            `datilResult` = #{datilResult}
+            where `batch_no` =#{batchNo}
+    </update>
+
+</mapper>
